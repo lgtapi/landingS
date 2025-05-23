@@ -20,7 +20,7 @@ const montserrat = Montserrat({
 
 export const metadata = {
   title: "SHEBN",
-  description: "The Global Community of Women in Blockchain and Web3",
+  description: "The Global Community of Women Blockchain and Web3",
 };
 
 export default function RootLayout({ children }) {
