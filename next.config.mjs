@@ -36,7 +36,12 @@ const nextConfig = {
   // Configuración para producción
   output: 'standalone',
   poweredByHeader: false,
-  reactStrictMode: true
+  reactStrictMode: true,
+  // Configuración específica para GoDaddy
+  trailingSlash: true,
+  images: {
+    unoptimized: true
+  }
 };
 
 export default nextConfig;
