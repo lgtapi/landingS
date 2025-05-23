@@ -140,7 +140,7 @@ export default function Form() {
             <div className="mb-6">
               <label htmlFor="howHear" className="block text-sm font-bold mb-2">¿How did you meet us?</label>
               {/* Added value and onChange handler */}
-              <input type="text" id="howHear" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write how you met us" value={howHear} onChange={(e) => setHowHear(e.target.value)} />
+              <input type="text" id="howHear" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write how you meet us" value={howHear} onChange={(e) => setHowHear(e.target.value)} />
             </div>
 
             <div className="flex items-center justify-center mt-8">
