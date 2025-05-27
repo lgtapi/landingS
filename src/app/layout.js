@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Montserrat } from 'next/font/google';
 import "./globals.css";
+import FacebookPixel from '@/components/FacebookPixel';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
           '--font-geist-mono': montserrat.style.fontFamily,
         }}
       >
+        <FacebookPixel />
         {children}
       </body>
     </html>

@@ -14,31 +14,71 @@ export default function Form() {
   const [username, setUsername] = useState('');
   const [web3Role, setWeb3Role] = useState('');
   const [howHear, setHowHear] = useState('');
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Validate form fields
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+    }
+    
+    if (!email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!country) {
+      newErrors.country = 'Please select your country';
+    }
+    
+    if (!username.trim()) {
+      newErrors.username = 'Username is required';
+    }
+    
+    if (!web3Role) {
+      newErrors.web3Role = 'Please select your Web3 role';
+    }
+    
+    if (!howHear.trim()) {
+      newErrors.howHear = 'Please tell us how you heard about us';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Handle form submission
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
 
-    // Collect form data with keys matching Supabase table column names (waitlist_entries)
-    const formData = {
-      full_name: fullName, // Matching waitlist_entries column
-      email: email, // Matching waitlist_entries column
-      country: country, // Matching waitlist_entries column
-      username: username, // Matching waitlist_entries column
-      web3_role: web3Role, // Matching waitlist_entries column
-      how_hear: howHear, // Matching waitlist_entries column,
-    };
+    setIsSubmitting(true);
 
-    // Insert data into Supabase using the table name 'waitlist_entries'
-    const { data, error } = await supabase
-      .from('waitlist_entries') // Using the correct table name
-      .insert([formData]);
+    try {
+      const formData = {
+        full_name: fullName,
+        email: email,
+        country: country,
+        username: username,
+        web3_role: web3Role,
+        how_hear: howHear,
+      };
 
-    if (error) {
-      console.error('Error submitting form:', error.message);
-      alert('Error submitting form. Please try again later.');
-    } else {
-      console.log('Form submitted successfully:', data);
+      const { data, error } = await supabase
+        .from('waitlist_entries')
+        .insert([formData]);
+
+      if (error) {
+        throw error;
+      }
+
       alert('Thank you for joining the waitlist!');
       // Clear form fields
       setFullName('');
@@ -47,6 +87,12 @@ export default function Form() {
       setUsername('');
       setWeb3Role('');
       setHowHear('');
+      setErrors({});
+    } catch (error) {
+      console.error('Error submitting form:', error.message);
+      alert('Error submitting form. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -74,20 +120,41 @@ export default function Form() {
         <div className="md:w-1/2 bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full">
           <form className="text-white" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="fullName" className="block text-sm font-bold mb-2">Full Name:</label>
-              {/* Added value and onChange handler */}
-              <input type="text" id="fullName" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write your full name" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+              <label htmlFor="fullName" className="block text-sm font-bold mb-2">Full Name: *</label>
+              <input
+                type="text"
+                id="fullName"
+                required
+                className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.fullName ? 'border-2 border-red-500' : ''}`}
+                placeholder="Write your full name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+              {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-bold mb-2">Email:</label>
-              {/* Added value and onChange handler */}
-              <input type="email" id="email" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <label htmlFor="email" className="block text-sm font-bold mb-2">Email: *</label>
+              <input
+                type="email"
+                id="email"
+                required
+                className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.email ? 'border-2 border-red-500' : ''}`}
+                placeholder="Write your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
             <div className="mb-4">
-              <label htmlFor="country" className="block text-sm font-bold mb-2">Country:</label>
+              <label htmlFor="country" className="block text-sm font-bold mb-2">Country: *</label>
               <div className="relative">
-                {/* Added value and onChange handler */}
-                <select id="country" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 text-gray-700" value={country} onChange={(e) => setCountry(e.target.value)}>
+                <select
+                  id="country"
+                  required
+                  className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 text-gray-700 ${errors.country ? 'border-2 border-red-500' : ''}`}
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                >
                   <option value="">Choose your country</option>
                   <option value="US">United States</option>
                   <option value="CA">Canada</option>
@@ -101,25 +168,35 @@ export default function Form() {
                   <option value="CO">Colombia</option>
                   <option value="VE">Venezuela</option>
                   <option value="CL">Chile</option>
-                  {/* Add more country options here as needed */}
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
+                {errors.country && <p className="text-red-500 text-xs mt-1">{errors.country}</p>}
               </div>
             </div>
             <div className="mb-6">
-              <label htmlFor="username" className="block text-sm font-bold mb-2">Your @ more active (X, Lens, Farcaster o IG)</label>
-              {/* Added value and onChange handler */}
-              <input type="text" id="username" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write your username" value={username} onChange={(e) => setUsername(e.target.value)} />
+              <label htmlFor="username" className="block text-sm font-bold mb-2">Your @ more active (X, Lens, Farcaster o IG): *</label>
+              <input
+                type="text"
+                id="username"
+                required
+                className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.username ? 'border-2 border-red-500' : ''}`}
+                placeholder="Write your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>}
             </div>
             
             <div className="mb-6">
               <p className="block text-sm font-bold mb-2 text-center">To get to know you better...</p>
-              <label htmlFor="web3Role" className="block text-sm font-bold mb-2">What role does Web3 represent for you today?</label>
+              <label htmlFor="web3Role" className="block text-sm font-bold mb-2">What role does Web3 represent for you today?: *</label>
               <div className="relative">
-                {/* Added value and onChange handler */}
-                <select id="web3Role" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 text-gray-700" value={web3Role} onChange={(e) => setWeb3Role(e.target.value)}>
+                <select
+                  id="web3Role"
+                  required
+                  className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 text-gray-700 ${errors.web3Role ? 'border-2 border-red-500' : ''}`}
+                  value={web3Role}
+                  onChange={(e) => setWeb3Role(e.target.value)}
+                >
                   <option value="">Choose your role</option>
                   <option value="builder">Builder (devs, smart contracts, infra)</option>
                   <option value="founder">Founder or co-founder</option>
@@ -131,22 +208,31 @@ export default function Form() {
                   <option value="explorer">Explorer (just entering the ecosystem)</option>
                   <option value="other">Other (tell us)</option>
                 </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
+                {errors.web3Role && <p className="text-red-500 text-xs mt-1">{errors.web3Role}</p>}
               </div>
             </div>
 
             <div className="mb-6">
-              <label htmlFor="howHear" className="block text-sm font-bold mb-2">¿How did you meet us?</label>
-              {/* Added value and onChange handler */}
-              <input type="text" id="howHear" className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Write how you meet us" value={howHear} onChange={(e) => setHowHear(e.target.value)} />
+              <label htmlFor="howHear" className="block text-sm font-bold mb-2">¿How did you meet us?: *</label>
+              <input
+                type="text"
+                id="howHear"
+                required
+                className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.howHear ? 'border-2 border-red-500' : ''}`}
+                placeholder="Write how you met us"
+                value={howHear}
+                onChange={(e) => setHowHear(e.target.value)}
+              />
+              {errors.howHear && <p className="text-red-500 text-xs mt-1">{errors.howHear}</p>}
             </div>
 
             <div className="flex items-center justify-center mt-8">
-              {/* Removed hover effects */}
-              <button type="submit" className="bg-[#31041F] text-white border border-pink-500 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 w-full md:w-auto">
-                Join SHEBN
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`bg-[#31041F] text-white border border-pink-500 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 w-full md:w-auto ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                {isSubmitting ? 'Submitting...' : 'Join SHEBN'}
               </button>
             </div>
           </form>
