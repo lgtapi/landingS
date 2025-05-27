@@ -219,7 +219,7 @@ export default function Form() {
                 id="howHear"
                 required
                 className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.howHear ? 'border-2 border-red-500' : ''}`}
-                placeholder="Write how you met us"
+                placeholder="Write how you meet us"
                 value={howHear}
                 onChange={(e) => setHowHear(e.target.value)}
               />
