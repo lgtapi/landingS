@@ -7,7 +7,7 @@ export default function Header() {
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
           Welcome to <span className="text-[#FF29D7]">SHEBN</span>
           <br />
-          <span className="font-extrabold">The Global Community of Women in Blockchain and Web3</span>
+          <span className="font-extrabold">The Global Community of Women in Web3</span>
         </h1>
         <p className="text-base md:text-lg font-light font-montserrat">Empowering women through collaboration, innovation and ecosystem opportunities. Promoting innovation and the development of technological solutions that address challenges in the industry.</p>
       </div>
