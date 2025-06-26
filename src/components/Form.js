@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FaInstagram } from 'react-icons/fa';
 import { BsTwitterX } from 'react-icons/bs';
 import { supabase } from '../../utils/supabaseClient'; // Import Supabase client
-import { useState } from 'react'; // Import useState
+import { useState, useEffect } from 'react'; // Import useState and useEffect
 
 export default function Form() {
   // State variables for form fields
@@ -17,6 +17,11 @@ export default function Form() {
   const [howHear, setHowHear] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Debug: log web3Role changes
+  useEffect(() => {
+    console.log('web3Role:', web3Role);
+  }, [web3Role]);
 
   // Validate form fields
   const validateForm = () => {
