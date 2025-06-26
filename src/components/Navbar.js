@@ -24,6 +24,7 @@ export default function Navbar() {
             <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Profiles</a>
             <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Projects</a>
             <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Forum</a>
+            <a href="#research" className="hover:text-pink-500 transition-colors duration-300">Research</a>
             <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Contact Us</a>
           </div>
         </div>
@@ -43,7 +44,8 @@ export default function Navbar() {
             <a href="#form-section" className="block hover:text-pink-500">Profiles</a>
             <a href="#form-section" className="block hover:text-pink-500">Projects</a>
             <a href="#form-section" className="block hover:text-pink-500">Forum</a>
-                    <a href="#form-section" className="block hover:text-pink-500">Contact Us</a>
+            <a href="#research" className="block hover:text-pink-500">Research</a>
+            <a href="#form-section" className="block hover:text-pink-500">Contact Us</a>
             <a href="#form-section" className="mt-4 block px-4 py-2 leading-none border rounded-2xl text-white border-white transition-colors duration-300 ring-1 shadow-2xl" style={{ borderColor: '#FF29D7' }}>
               Join the waitlist
             </a>
