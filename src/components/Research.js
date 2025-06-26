@@ -170,7 +170,7 @@ export default function Research() {
       .from('research_responses')
       .insert([formData]);
     if (supaError) {
-      setError('Error submitting form. Please try again later.');
+      setError('Error submitting form: ' + supaError.message);
     } else {
       setSuccess(true);
     }
