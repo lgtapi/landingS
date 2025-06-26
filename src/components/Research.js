@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { supabase } from '../../utils/supabaseClient'; // Asegúrate de tener esto configurado
 
 export default function Research() {
   const [mainRole, setMainRole] = useState('');
@@ -25,15 +26,72 @@ export default function Research() {
   const [futureContact, setFutureContact] = useState('');
   const [futureContactValue, setFutureContactValue] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!mainRole || (mainRole === 'other' && !mainRoleOther.trim()) || !teamStatus || !teamSize || !womenCount || !womenLeadership || !web3Funding || challenges.length === 0 || challenges.length > 3 || (challenges.includes('other') && !challengesOther.trim()) || opportunities.length === 0 || opportunities.length > 3 || (opportunities.includes('other') && !opportunitiesOther.trim()) || !country || !city.trim() || challenges2.length === 0 || challenges2.length > 3 || (challenges2.includes('other') && !challenges2Other.trim()) || barriers.length === 0 || (barriers.includes('other') && !barriersOther.trim()) || missing.length === 0 || missing.length > 3 || (missing.includes('other') && !missingOther.trim()) || !negativeExp || (futureContact === 'yes' && !futureContactValue.trim())) {
       setError('Please answer all questions. Para las preguntas de selección múltiple, elige entre 1 y 3 opciones y especifica si elegiste Other.');
       return;
     }
     setError('');
-    // Aquí podrías manejar el envío de datos
-    alert('Form submitted!');
+
+    const formData = {
+      main_role: mainRole,
+      main_role_other: mainRole === 'other' ? mainRoleOther : '',
+      team_status: teamStatus,
+      team_size: teamSize,
+      women_count: womenCount,
+      women_leadership: womenLeadership,
+      web3_funding: web3Funding,
+      challenges,
+      challenges_other: challenges.includes('other') ? challengesOther : '',
+      opportunities,
+      opportunities_other: opportunities.includes('other') ? opportunitiesOther : '',
+      country,
+      city,
+      challenges2,
+      challenges2_other: challenges2.includes('other') ? challenges2Other : '',
+      barriers,
+      barriers_other: barriers.includes('other') ? barriersOther : '',
+      missing,
+      missing_other: missing.includes('other') ? missingOther : '',
+      negative_experience: negativeExp,
+      future_contact: futureContact,
+      future_contact_value: futureContact === 'yes' ? futureContactValue : ''
+    };
+
+    const { data, error } = await supabase
+      .from('research_responses')
+      .insert([formData]);
+
+    if (error) {
+      setError('Error submitting form. Please try again later.');
+    } else {
+      alert('Thank you for your response!');
+      // Limpiar todos los estados del formulario
+      setMainRole('');
+      setMainRoleOther('');
+      setTeamStatus('');
+      setTeamSize('');
+      setWomenCount('');
+      setWomenLeadership('');
+      setWeb3Funding('');
+      setChallenges([]);
+      setChallengesOther('');
+      setOpportunities([]);
+      setOpportunitiesOther('');
+      setCountry('');
+      setCity('');
+      setChallenges2([]);
+      setChallenges2Other('');
+      setBarriers([]);
+      setBarriersOther('');
+      setMissing([]);
+      setMissingOther('');
+      setNegativeExp('');
+      setFutureContact('');
+      setFutureContactValue('');
+      setError('');
+    }
   };
 
   const handleChallengeChange = (e) => {
