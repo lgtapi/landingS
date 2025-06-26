@@ -13,6 +13,7 @@ export default function Form() {
   const [country, setCountry] = useState('');
   const [username, setUsername] = useState('');
   const [web3Role, setWeb3Role] = useState('');
+  const [web3RoleOther, setWeb3RoleOther] = useState('');
   const [howHear, setHowHear] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,6 +44,10 @@ export default function Form() {
       newErrors.web3Role = 'Please select your Web3 role';
     }
     
+    if (web3Role === 'other' && !web3RoleOther.trim()) {
+      newErrors.web3RoleOther = 'Please specify your Web3 role';
+    }
+    
     if (!howHear.trim()) {
       newErrors.howHear = 'Please tell us how you heard about us';
     }
@@ -68,6 +73,7 @@ export default function Form() {
         country: country,
         username: username,
         web3_role: web3Role,
+        web3_role_other: web3Role === 'other' ? web3RoleOther : '',
         how_hear: howHear,
       };
 
@@ -86,6 +92,7 @@ export default function Form() {
       setCountry('');
       setUsername('');
       setWeb3Role('');
+      setWeb3RoleOther('');
       setHowHear('');
       setErrors({});
     } catch (error) {
@@ -210,6 +217,20 @@ export default function Form() {
                 </select>
                 {errors.web3Role && <p className="text-red-500 text-xs mt-1">{errors.web3Role}</p>}
               </div>
+              {web3Role === 'other' && (
+                <div className="mt-4">
+                  <label htmlFor="web3RoleOther" className="block text-sm font-bold mb-2">Please specify your Web3 role: *</label>
+                  <input
+                    type="text"
+                    id="web3RoleOther"
+                    className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.web3RoleOther ? 'border-2 border-red-500' : ''}`}
+                    placeholder="Write your Web3 role"
+                    value={web3RoleOther}
+                    onChange={(e) => setWeb3RoleOther(e.target.value)}
+                  />
+                  {errors.web3RoleOther && <p className="text-red-500 text-xs mt-1">{errors.web3RoleOther}</p>}
+                </div>
+              )}
             </div>
 
             <div className="mb-6">
