@@ -189,12 +189,12 @@ export default function Research() {
                 <div className="mb-6">
                   <p className="block text-lg font-bold mb-4 text-center">What is your main role in Web3 today?</p>
                   <div className="flex flex-col space-y-3">
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="founder" checked={mainRole === 'founder'} onChange={() => setMainRole('founder')} className="mr-2" />Founder or co-founder of a project</label>
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="technical" checked={mainRole === 'technical'} onChange={() => setMainRole('technical')} className="mr-2" />Part of a technical team</label>
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="employee" checked={mainRole === 'employee'} onChange={() => setMainRole('employee')} className="mr-2" />Employee in a Web3 company</label>
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="investor" checked={mainRole === 'investor'} onChange={() => setMainRole('investor')} className="mr-2" />Investor or advisor</label>
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="student" checked={mainRole === 'student'} onChange={() => setMainRole('student')} className="mr-2" />Student or in training</label>
-                    <label className="flex items-center"><input type="radio" name="mainRole" value="other" checked={mainRole === 'other'} onChange={() => setMainRole('other')} className="mr-2" />Other (please specify)</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="founder" checked={mainRole === 'founder'} onChange={() => { setMainRole('founder'); setError(''); }} className="mr-2" />Founder or co-founder of a project</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="technical" checked={mainRole === 'technical'} onChange={() => { setMainRole('technical'); setError(''); }} className="mr-2" />Part of a technical team</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="employee" checked={mainRole === 'employee'} onChange={() => { setMainRole('employee'); setError(''); }} className="mr-2" />Employee in a Web3 company</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="investor" checked={mainRole === 'investor'} onChange={() => { setMainRole('investor'); setError(''); }} className="mr-2" />Investor or advisor</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="student" checked={mainRole === 'student'} onChange={() => { setMainRole('student'); setError(''); }} className="mr-2" />Student or in training</label>
+                    <label className="flex items-center"><input type="radio" name="mainRole" value="other" checked={mainRole === 'other'} onChange={() => { setMainRole('other'); setError(''); }} className="mr-2" />Other (please specify)</label>
                     {mainRole === 'other' && (
                       <input type="text" className="mt-2 shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500" placeholder="Please specify your role" value={mainRoleOther} onChange={e => setMainRoleOther(e.target.value)} />
                     )}
