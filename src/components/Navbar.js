@@ -20,12 +20,12 @@ export default function Navbar() {
           
 
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Home</a>
-            <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Profiles</a>
-            <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Projects</a>
-            <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Forum</a>
+            <a href="/#form-section" className="hover:text-pink-500 transition-colors duration-300">Home</a>
+            <a href="/#form-section" className="hover:text-pink-500 transition-colors duration-300">Profiles</a>
+            <a href="/#form-section" className="hover:text-pink-500 transition-colors duration-300">Projects</a>
+            <a href="/#form-section" className="hover:text-pink-500 transition-colors duration-300">Forum</a>
             <a href="/research" className="hover:text-pink-500 transition-colors duration-300">Research</a>
-            <a href="#form-section" className="hover:text-pink-500 transition-colors duration-300">Contact Us</a>
+            <a href="/#form-section" className="hover:text-pink-500 transition-colors duration-300">Contact Us</a>
           </div>
         </div>
         <div className="block md:hidden">
@@ -34,19 +34,19 @@ export default function Navbar() {
           </button>
         </div>
         <div className="hidden md:block">
-          <a href="#form-section" className="inline-block text-sm px-4 py-2 leading-none border rounded-2xl text-white border-white transition-colors duration-300 ring-1 shadow-2xl" style={{ borderColor: '#FF29D7' }}>
+          <a href="/#form-section" className="inline-block text-sm px-4 py-2 leading-none border rounded-2xl text-white border-white transition-colors duration-300 ring-1 shadow-2xl" style={{ borderColor: '#FF29D7' }}>
             Join the waitlist
           </a>
         </div>
         <div className={`w-full flex-grow md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#form-section" className="block hover:text-pink-500">Home</a>
-            <a href="#form-section" className="block hover:text-pink-500">Profiles</a>
-            <a href="#form-section" className="block hover:text-pink-500">Projects</a>
-            <a href="#form-section" className="block hover:text-pink-500">Forum</a>
+            <a href="/#form-section" className="block hover:text-pink-500">Home</a>
+            <a href="/#form-section" className="block hover:text-pink-500">Profiles</a>
+            <a href="/#form-section" className="block hover:text-pink-500">Projects</a>
+            <a href="/#form-section" className="block hover:text-pink-500">Forum</a>
             <a href="/research" className="block hover:text-pink-500">Research</a>
-            <a href="#form-section" className="block hover:text-pink-500">Contact Us</a>
-            <a href="#form-section" className="mt-4 block px-4 py-2 leading-none border rounded-2xl text-white border-white transition-colors duration-300 ring-1 shadow-2xl" style={{ borderColor: '#FF29D7' }}>
+            <a href="/#form-section" className="block hover:text-pink-500">Contact Us</a>
+            <a href="/#form-section" className="mt-4 block px-4 py-2 leading-none border rounded-2xl text-white border-white transition-colors duration-300 ring-1 shadow-2xl" style={{ borderColor: '#FF29D7' }}>
               Join the waitlist
             </a>
           </div>
