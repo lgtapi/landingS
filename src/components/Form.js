@@ -219,12 +219,12 @@ export default function Form() {
               </div>
               {web3Role === 'other' && (
                 <div className="mt-4">
-                  <label htmlFor="web3RoleOther" className="block text-sm font-bold mb-2">Please specify your Web3 role: *</label>
+                  <label htmlFor="web3RoleOther" className="block text-sm font-bold mb-2">Tell Us: *</label>
                   <input
                     type="text"
                     id="web3RoleOther"
                     className={`shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-pink-200 placeholder-gray-500 ${errors.web3RoleOther ? 'border-2 border-red-500' : ''}`}
-                    placeholder="Write your Web3 role"
+                    placeholder="Tell us your Web3 role"
                     value={web3RoleOther}
                     onChange={(e) => setWeb3RoleOther(e.target.value)}
                   />
