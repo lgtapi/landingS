@@ -73,7 +73,7 @@ export default function Form() {
         country: country,
         username: username,
         web3_role: web3Role,
-        web3_role_other: web3Role === 'other' ? web3RoleOther : '',
+        rol_web3_otro: web3Role === 'other' ? web3RoleOther : '',
         how_hear: howHear,
       };
 
