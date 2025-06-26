@@ -184,7 +184,7 @@ export default function Research() {
           {success ? (
             <div className="text-center text-white text-2xl">Thank you for your response!</div>
           ) : (
-            <form className="text-white" onSubmit={step === steps.length - 1 ? handleSubmit : (e) => { e.preventDefault(); handleNext(); }}>
+            <form className="text-white" onSubmit={handleSubmit}>
               {/* Paso 1 */}
               {steps[step] === 'mainRole' && (
                 <div className="mb-6">
@@ -587,9 +587,15 @@ export default function Research() {
               )}
               {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
               <div className="flex items-center justify-center mt-8">
-                <button type={step === steps.length - 1 ? 'submit' : 'button'} className="bg-[#31041F] text-white border border-pink-500 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 w-full md:w-auto">
-                  {step === steps.length - 1 ? 'Enviar' : 'Next'}
-                </button>
+                {step === steps.length - 1 ? (
+                  <button type="submit" className="bg-[#31041F] text-white border border-pink-500 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 w-full md:w-auto">
+                    Enviar
+                  </button>
+                ) : (
+                  <button type="button" onClick={handleNext} className="bg-[#31041F] text-white border border-pink-500 font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 w-full md:w-auto">
+                    Next
+                  </button>
+                )}
               </div>
             </form>
           )}
