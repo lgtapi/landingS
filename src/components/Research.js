@@ -69,6 +69,7 @@ export default function Research() {
 
   // Validación y avance de pasos
   const handleNext = () => {
+    console.log('Paso actual:', step, 'Pregunta:', steps[step]);
     switch (steps[step]) {
       case 'mainRole':
         if (!mainRole || (mainRole === 'other' && !mainRoleOther.trim())) {
