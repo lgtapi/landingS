@@ -102,7 +102,7 @@ export default function Form() {
       setErrors({});
     } catch (error) {
       console.error('Error submitting form:', error.message);
-      alert('Error submitting form. Please try again later.');
+      alert('Error: ' + error.message);
     } finally {
       setIsSubmitting(false);
     }
