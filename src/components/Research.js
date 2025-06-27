@@ -166,11 +166,9 @@ export default function Research() {
       future_contact: futureContact,
       future_contact_value: futureContact === 'yes' ? futureContactValue : ''
     };
-    const { error: supaError } = await supabase
-      .from('research_responses')
-      .insert([formData]);
-    if (supaError) {
-      setError('Error submitting form: ' + supaError.message);
+    const { error } = await supabase.from('waitlist_entries').insert([formData]);
+    if (error) {
+      alert('Error: ' + error.message);
     } else {
       setSuccess(true);
     }
@@ -181,6 +179,9 @@ export default function Research() {
     <section className="py-16 px-6" style={{ backgroundColor: '#8C2478' }}>
       <div className="container mx-auto flex justify-center">
         <div className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-2xl">
+          {/* Título y subtítulo agregados */}
+          <h1 className="text-3xl font-extrabold text-center text-white mb-2">Empowering women in web3</h1>
+          <p className="text-lg text-center text-white mb-8">Help us grow better — take a minute to fill out our survey!</p>
           {success ? (
             <div className="text-center text-white text-2xl">Thank you for your response!</div>
           ) : (
