@@ -181,7 +181,7 @@ export default function Research() {
         <div className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-2xl">
           {/* Título y subtítulo agregados */}
           <h1 className="text-3xl font-extrabold text-center text-white mb-2">Empowering women in web3</h1>
-          <p className="text-lg text-center text-white mb-8">Help us grow better — take a minute to fill out our survey!</p>
+          <h3 className="text-lg text-center text-white mb-8 font-medium">Help us grow better — take a minute to fill out our survey!</h3>
           {success ? (
             <div className="text-center text-white text-2xl">Thank you for your response!</div>
           ) : (
