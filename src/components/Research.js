@@ -166,7 +166,7 @@ export default function Research() {
       future_contact: futureContact,
       future_contact_value: futureContact === 'yes' ? futureContactValue : ''
     };
-    const { error } = await supabase.from('waitlist_entries').insert([formData]);
+    const { error } = await supabase.from('research_responses').insert([formData]);
     if (error) {
       alert('Error: ' + error.message);
     } else {
