@@ -177,11 +177,13 @@ export default function Research() {
   // Renderizado condicional por paso
   return (
     <section className="py-16 px-6" style={{ backgroundColor: '#8C2478' }}>
+      {/* Título y subtítulo fuera del recuadro */}
+      <div className="container mx-auto flex flex-col items-center mb-6">
+        <h1 className="text-3xl font-extrabold text-center text-white mb-2">Empowering women in web3</h1>
+        <h3 className="text-lg text-center text-white mb-8 font-medium">Help us grow better — take a minute to fill out our survey!</h3>
+      </div>
       <div className="container mx-auto flex justify-center">
         <div className="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg w-full max-w-2xl">
-          {/* Título y subtítulo agregados */}
-          <h1 className="text-3xl font-extrabold text-center text-white mb-2">Empowering women in web3</h1>
-          <h3 className="text-lg text-center text-white mb-8 font-medium">Help us grow better — take a minute to fill out our survey!</h3>
           {success ? (
             <div className="text-center text-white text-2xl">Thank you for your response!</div>
           ) : (
